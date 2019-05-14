@@ -20,9 +20,7 @@ const Index = (props) => (
 Index.getInitialProps = async function () {
   const resNHL = await fetch('https://statsapi.web.nhl.com/api/v1/teams/')
   const nhlData = await resNHL.json();
-  console.log(nhlData.teams);
 
-  console.log(`Show data fetched. Count: ${nhlData.teams.length}`)
   const nhlTeams = nhlData.teams;
   return {
     teams: nhlTeams

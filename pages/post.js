@@ -14,10 +14,33 @@ const PostContainer = styled.section`
 const Post = props => (
   <Layout>
     <h1>{props.nhlTeam[0].name}</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Games Played</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Overtime</th>
+          <th>Points</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{props.singleSeason[0].stat.gamesPlayed}</td>
+          <td>{props.singleSeason[0].stat.wins}</td>
+          <td>{props.singleSeason[0].stat.losses}</td>
+          <td>{props.singleSeason[0].stat.ot}</td>
+          <td>{props.singleSeason[0].stat.pts}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    {console.log(props.singleSeason[0].stat)}
     <PostContainer>
-        {props.teamRoster.map((player) => (
-          <Player playerName={player.person.fullName} playerNumber={player.jerseyNumber} playerPosition={player.position.code} />
-            // <span>{player.person.fullName} <strong>{player.jerseyNumber}</strong></span>{console.log(player.position)}
+        {props.teamRoster.map((player, k) => (
+          <Player playerId={player.person.id} playerName={player.person.fullName} playerNumber={player.jerseyNumber} playerPosition={player.position.code} />
         ))}
     </PostContainer>
   </Layout>
@@ -29,10 +52,13 @@ Post.getInitialProps = async function (context) {
   const team = await res.json()
   const resTeam = await fetch(`https://statsapi.web.nhl.com/api/v1/teams/${id}/roster`);
   const roster = await resTeam.json();
-  // console.log(roster)
+  const resStats = await fetch(`https://statsapi.web.nhl.com/api/v1/teams/${id}/stats`);
+  const teamStats = await resStats.json();
   const teamRoster = roster.roster;
   const nhlTeam = team.teams;
-  return { nhlTeam, teamRoster }
+  const singleSeason = teamStats.stats[0].splits;
+  console.log(singleSeason);
+  return { nhlTeam, teamRoster, singleSeason }
 }
 
 export default Post
