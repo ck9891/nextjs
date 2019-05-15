@@ -3,12 +3,6 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Layout from '../components/MyLayout.js'
 
-const PostContainer = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 15px;
-`;
 
 const SinglePlayer = props => (
   <Layout>
@@ -22,6 +16,12 @@ const SinglePlayer = props => (
       <p>Assists: {props.playerStats.stats[0].splits[0].stat.assists}</p>
       <p>Points: {props.playerStats.stats[0].splits[0].stat.points}</p>
       <p>Penalty Minutes: {props.playerStats.stats[0].splits[0].stat.pim}</p>
+      <p>Shots: {props.playerStats.stats[0].splits[0].stat.shots}</p>
+      <p>Blocked Shots: {props.playerStats.stats[0].splits[0].stat.blocked}</p>
+      <p>Even Time on Ice: {props.playerStats.stats[0].splits[0].stat.evenTimeOnIcePerGame}</p>
+      <p>Short Handed Time on Ice: {props.playerStats.stats[0].splits[0].stat.shortHandedTimeOnIcePerGame}</p>
+      <p>Powerplay Time on Ice: {props.playerStats.stats[0].splits[0].stat.powerPlayTimeOnIcePerGame}</p>
+      <p>Total Time on Ice: {props.playerStats.stats[0].splits[0].stat.timeOnIcePerGame}</p>
     </div>
   </Layout>
 )

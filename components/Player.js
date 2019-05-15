@@ -8,20 +8,33 @@ const StyledPlayer = styled.div`
   .player-card {
     width: 350px;
     height: 125px;
-    border: 1px solid #333;
+    border: 1px solid #eee;
     padding: 1rem;
     display: flex
     justify-content: center;
     flex-direction: column;
+    box-shadow: 1px 1px 5px 1px #999;
+
+
     .player-header {
       display: flex;
       .player-image{
         margin: 0 .5rem;
+        position: relative
+        left: -40px;
+        border-radius: 100%;
+        border: 3px solid #333;
         .img-thumb {
           border-radius: 100%;
+          max-width:100px;
+          display: block;
         }
       }
       .card-title {
+        a {
+          color:#111;
+          text-decoration: none;
+        }
         h2 {
           margin: 5px 0;
         }
@@ -34,6 +47,7 @@ const StyledPlayer = styled.div`
   .player-info {
     width:100%;
   }
+
 }
 `;
 
@@ -44,7 +58,7 @@ const Player = props => (
       <div className="player-card">
         <div className="player-header">
           <div className="player-image">
-            <img src="https://place-hold.it/100" className="img-thumb"></img>
+            <img src={`https://nhl.bamcontent.com/images/headshots/current/168x168/${props.playerId}.jpg`} className="img-thumb"></img>
           </div>
           <div className="card-title">
             <h2>{props.playerName}</h2>
@@ -54,7 +68,6 @@ const Player = props => (
         </div>
 
         <div className="player-info">
-            {props.playerId}
 
         </div>
       </div>

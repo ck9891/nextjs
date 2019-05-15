@@ -6,13 +6,24 @@ import Player from '../components/Player.js'
 
 const PostContainer = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 15px;
   grid-row-gap: 15px;
+`;
+
+const TeamLogo = styled.div`
+  .team-logo {
+    display: flex;
+    justify-self:center;
+    max-width:200px;
+  }
 `;
 
 const Post = props => (
   <Layout>
+    <TeamLogo>
+    <img src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${props.nhlTeam[0].id}.svg`} className="team-logo" ></img>
+    </TeamLogo>
     <h1>{props.nhlTeam[0].name}</h1>
 
     <table>
@@ -37,10 +48,9 @@ const Post = props => (
       </tbody>
     </table>
 
-    {console.log(props.singleSeason[0].stat)}
     <PostContainer>
         {props.teamRoster.map((player, k) => (
-          <Player playerId={player.person.id} playerName={player.person.fullName} playerNumber={player.jerseyNumber} playerPosition={player.position.code} />
+          <Player key={player.person.id} playerId={player.person.id} playerName={player.person.fullName} playerNumber={player.jerseyNumber} playerPosition={player.position.code} />
         ))}
     </PostContainer>
   </Layout>
@@ -57,7 +67,7 @@ Post.getInitialProps = async function (context) {
   const teamRoster = roster.roster;
   const nhlTeam = team.teams;
   const singleSeason = teamStats.stats[0].splits;
-  console.log(singleSeason);
+  console.log(nhlTeam);
   return { nhlTeam, teamRoster, singleSeason }
 }
 
